@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link href="css/style.css" rel="stylesheet">-->
+</head>
+
+
+<body>
+
+    <div id="container">
+
+        <waterfall :line-gap="200" :watch="items">
+            <!-- each component is wrapped by a waterfall slot -->
+            <waterfall-slot v-for="(item, index) in items" :width="item.width" :height="item.height" :order="index" :key="item.id">
+                <!--
+      your component
+    -->
+                {{item.id}}
+            </waterfall-slot>
+        </waterfall>
+    </div>
+
+    <script src="https://s.momocdn.com/w/js/2016/07/28/1469676390847-JPf4fb538e7fa6cbfbbf881494f533e174.js"></script>
+    <script src="https://s.momocdn.com/w/u/js/2017/03/02/1488451226218-vue-waterfall.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#container',
+            data: {
+                items: [{}]
+            },
+            components: {
+                'waterfall': Waterfall.waterfall,
+                'waterfall-slot': Waterfall.waterfallSlot
+            },
+        })
+    </script>
+</body>
+
+</html>

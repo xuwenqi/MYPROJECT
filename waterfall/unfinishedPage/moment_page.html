@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset='utf-8'>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta content="email=no" name="format-detection"/>
+    <!--<link rel="stylesheet" href="https://fes.wemomo.com/static/dev.css?m=ui.reset">-->
+    <link rel="stylesheet" href="static/css/popup.css">
+    <style>
+        body {
+            background: #fff;
+        }
+
+        .topic_head {
+            width: 100%;
+            height: 2.18rem;
+            padding-top: 0.62rem;
+            overflow: hidden;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.5);
+            background-size: cover;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .topic_img {
+            width: 0.9rem;
+            height: 0.9rem;
+            border-radius: .08rem;
+            display: block;
+            position: absolute;
+            top: 1.02rem;
+            left: 0.24rem;
+        }
+
+        .topic_name {
+            font-size: 0.32rem;
+            line-height: 0.45rem;
+            color: rgb(255, 255, 255);
+            font-family: "PingFang SC";
+            font-weight: normal;
+            position: absolute;
+            top: 1.02rem;
+            left: 1.34rem;
+        }
+
+        .topic_info {
+            font-family: "SF UI Display";
+            font-weight: normal;
+            font-size: 0.26rem;
+            line-height: 0.37rem;
+            color: rgba(255, 255, 255, 0.6);
+            width: 5rem;
+            position: absolute;
+            top: 1.53rem;
+            left: 1.34rem;
+        }
+
+        .topic_desc {
+            width: 100%;
+            min-height: 1.25rem;
+            box-sizing: border-box;
+            padding: .24rem .3rem;
+            position: relative;
+        }
+
+        .topic_desc p {
+            font-size: .28rem;
+            line-height: .34rem;
+            font-family: "PingFang SC";
+            font-weight: normal;
+            color: #aaa;
+        }
+
+        .topic_desc:after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #f0f0f0;
+            transform: scaleY(0.5);
+        }
+
+        .main_container {
+            margin-left: .18rem;
+            margin-right: .18rem;
+            overflow: hidden;
+            box-sizing: border-box;
+            padding-top: .2rem;
+        }
+
+        .moment_container {
+            width: 50%;
+            /*height:5.2rem;*/
+            padding: 0 0.07rem !important;
+            float: left;
+            box-sizing: border-box;
+        }
+
+        .moment {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            border-radius: 0.06rem;
+        }
+
+        .cover_img_con {
+            position: relative;
+            border-radius: .06rem;
+            overflow: hidden;
+            max-height: 4.72rem;
+            overflow: hidden;
+            background-color: rgb(210, 210, 210);
+        }
+
+        .cover_img {
+            display: block;
+        }
+
+        .moment_name {
+            font-size: .26rem;
+            font-family: "PingFang SC";
+            font-weight: 500;
+            line-height: .38rem;
+            color: #fff;
+            position: absolute;
+            left: 0.1rem;
+            bottom: 0.07rem;
+            width: 3rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .moment_foot {
+            width: 100%;
+            height: 1rem;
+            box-sizing: border-box;
+            padding-left: 0.2rem;
+            padding-top: 0.27rem;
+            position: relative;
+            bottom: 0;
+            background-color: #fff;
+        }
+
+        .user_img {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            position: absolute;
+            top: .14rem;
+            left: .07rem;
+        }
+
+        .user_name {
+            position: absolute;
+            left: .7rem;
+            top: .2rem;
+            font-size: 0.22rem;
+            line-height: 0.38rem;
+            font-family: "PingFang SC";
+            font-weight: 500;
+            color: #3c3c3c;
+            /*width: 2.5rem;*/
+            width: 1.8rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .like_count {
+            right: 0;
+            font-size: .28rem;
+            font-family: "DIN Alternate";
+            font-weight: bold;
+            color: #c8c8c8;
+            line-height: .32rem;
+            top: .23rem;
+            position: absolute;
+            padding-left: .3rem;
+            box-sizing: border-box;
+        }
+
+        .like_count:before {
+            content: '';
+            background-image: url('https://s.momocdn.com/w/u/img/2017/03/03/1488510371880-like.png');
+            background-size: 100% 100%;
+            width: .24rem;
+            height: .24rem;
+            position: absolute;
+            left: 0;
+            top: .03rem;
+        }
+
+        .publish_btn {
+            width: 100%;
+            height: .9rem;
+            line-height: .9rem;
+            text-align: center;
+            background-color: rgba(52, 98, 255, 0.94);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        .publish_btn span {
+            color: #fff;
+            font-size: .28rem;
+            font-family: "PingFang SC";
+            font-weight: normal;
+            padding-left: .5rem;
+            height: .4rem;
+            line-height: .4rem;
+            position: relative;
+
+        }
+
+        .publish_btn span:before {
+            content: '';
+            background-image: url('https://s.momocdn.com/w/u/img/2017/03/03/1488523383047-Bitmap%20(1).png');
+            background-size: 100% 100%;
+            width: .33rem;
+            height: .29rem;
+            position: absolute;
+            left: 0;
+            top: .05rem;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        .loading {
+            height: .6rem;
+            text-align: center;
+            padding-top: .19rem;
+        }
+
+        .loading img {
+            height: .5rem;
+            -webkit-animation: circle 0.4s infinite linear; /*匀速 循环*/
+        }
+
+        @-webkit-keyframes circle {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+
+        .sex-icon {
+            position: absolute;
+            width: 0.25rem;
+            height: 0.25rem;
+            top: 0.65rem;
+            left: 0.58rem;
+        }
+
+        .empty {
+            padding-top: 2rem;
+        }
+
+        .empty img {
+            width: 3.44rem;
+            height: 2.7rem;
+            margin: 0 auto;
+            position: relative;
+            display: block;
+        }
+
+        .head_text img {
+            width: .18rem;
+            height: .23rem;
+            vertical-align: middle;
+            position: absolute;
+            margin-left: .03rem;
+            margin-top: .01rem;
+        }
+
+        .head_text span:first-child {
+            margin-right: .06rem;
+        }
+
+        .single_head_list .left_title_img {
+            width: 2.83rem;
+            height: .64rem;
+            position: absolute;
+            top: .36rem;
+            left: 0;
+        }
+
+        .single_head_list .head_list {
+            overflow: hidden;
+            width: 4.3rem;
+            position: absolute;
+            right: 0;
+        }
+
+        .single_head_list .head_list img {
+            width: .76rem;
+            height: .76rem;
+            border-radius: 50%;
+            margin-right: .2rem;
+            float: left;
+            margin-top: .32rem;
+        }
+
+        .single_head_list .head_list .right_icon {
+            width: .17rem;
+            height: .3rem;
+            margin-top: .52rem;
+        }
+
+        .single_head_list .head_list img:last-child {
+
+        }
+
+        .download {
+            width: 100%;
+            /* height: 1.4rem; */
+            box-sizing: border-box;
+            background-color: rgb(23, 142, 237);
+            padding-top: 0.21rem;
+            padding-bottom: 0.21rem;
+            position: fixed;
+            bottom: 0;
+            display: block;
+            color: #fff;
+        }
+
+        .download img {
+            width: 94%;
+            /*height:73%;*/
+            margin: 0 auto;
+            display: block;
+        }
+
+        .download p:nth-child(2) {
+            position: absolute;
+            width: 50%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            font-size: .32rem;
+            font-weight: 700;
+            top: 23%;
+            left: 17%;
+        }
+
+        .download p:last-child {
+            position: absolute;
+            width: 50%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            font-size: .28rem;
+            font-weight: 300;
+            top: 55%;
+            left: 17%;
+        }
+
+        .empty_in {
+            height: .2rem;
+        }
+
+        .empty_out {
+            height: 1.5rem;
+        }
+
+        .back_img {
+            width: 100%;
+            /*height:2.9rem;*/
+            display: block;
+            position: relative;
+        }
+
+        .img_con {
+            width: 100%;
+            height: 2.18rem;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="app_el" v-cloak>
+    <div class="topic_head">
+        <img class="topic_img"
+             src="http://img.momocdn.com/album/9D/CC/9DCC1814-7FFE-5AFD-12AE-07315BD0307420161219_S.jpg" alt="">
+        <p class="topic_name" v-html="theme_info.theme_name"></p>
+        <p class="topic_info" v-html="theme_info.desc"></p>
+    </div>
+    <div class="img_con">
+        <img :src="banner_img" class="back_img">
+    </div>
+
+    <div class="topic_desc">
+    <p>{{theme_info.desc}}</p>
+    </div>
+
+    <!--<div v-if="!empty" class="main_container">-->
+    <!--<div class="moment_container" v-for="item in moment_list" data-sex="{{item.user.sex}}" data-userid="{{item.user.momoid}}" @click="momentGoto(item)">-->
+    <!--<div class="moment">-->
+        <!--<div class="cover_img_con">-->
+            <!--<img class="cover_img" :src="item.moment.cover" alt="">-->
+            <!--<p class="moment_name">转眼又到星期五</p>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<p class="moment_distance">{{item.moment.distance}}</p>&ndash;&gt;-->
+        <!--<div class="moment_foot">-->
+            <!--<img class="user_img" :src="item.user.img" alt="">-->
+            <!--&lt;!&ndash;<img v-if="item.user.sex=='M'" class="sex-icon" src="https://s.momocdn.com/w/u/img/2016/10/13/1476359960631-%E6%97%B6%E5%88%BB%E8%AF%9D%E9%A2%98-2_06.png" alt="">&ndash;&gt;-->
+            <!--&lt;!&ndash;<img v-if="item.user.sex=='F'" class="sex-icon" src="https://s.momocdn.com/w/u/img/2016/10/13/1476359960626-%E6%97%B6%E5%88%BB%E8%AF%9D%E9%A2%98-2_03.png" alt="">&ndash;&gt;-->
+            <!--<p class="user_name">{{{item.user.name}}}</p>-->
+            <!--<p class="like_count">8888</p>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <waterfall :align="align" :line-gap="200" :min-line-gap="100" :max-line-gap="220" :single-max-width="300"
+               :watch="items" @reflowed="reflowed" ref="waterfall" class="main_container">
+        <!-- each component is wrapped by a waterfall slot -->
+        <waterfall-slot v-for="(item, index) in items" :width="300" :height="300*item.ratio" :order="index"
+                        :key="index" move-class="item-move" class="moment_container">
+
+            <div class="moment">
+                <div class="cover_img_con" style="width:calculateHeiht()">
+                    <img class="cover_img" :src="item.moment.cover" alt="">
+                    <p class="moment_name">转眼又到星期五</p>
+                </div>
+                <!--<p class="moment_distance">{{item.moment.distance}}</p>-->
+                <div class="moment_foot">
+                    <img class="user_img" :src="item.user.img" alt="">
+                    <!--<img v-if="item.user.sex=='M'" class="sex-icon" src="https://s.momocdn.com/w/u/img/2016/10/13/1476359960631-%E6%97%B6%E5%88%BB%E8%AF%9D%E9%A2%98-2_06.png" alt="">-->
+                    <!--<img v-if="item.user.sex=='F'" class="sex-icon" src="https://s.momocdn.com/w/u/img/2016/10/13/1476359960626-%E6%97%B6%E5%88%BB%E8%AF%9D%E9%A2%98-2_03.png" alt="">-->
+                    <p class="user_name" v-html="item.user.name"></p>
+                    <p class="like_count">8888</p>
+                </div>
+            </div>
+
+
+        </waterfall-slot>
+    </waterfall>
+
+
+    <!--<div class="loading" v-if="!isend&&page>1"><img-->
+    <!--src="https://s.momocdn.com/w/u/img/03/10/1457603892170-ic_loading.png" alt=""></div>-->
+    <!--<div v-if="empty" class="empty">-->
+    <!--<img src="https://s.momocdn.com/w/u/img/2016/10/14/1476415482706-%E6%97%B6%E5%88%BB%E8%AF%9D%E9%A2%98%EF%BC%8D%E6%97%A0%E8%AF%9D%E9%A2%98_05.png"-->
+    <!--alt="">-->
+    <!--</div>-->
+    <!--<div :class="[in_app?'empty_in':'empty_out']"></div>-->
+    <!--<a class="download" v-if="!in_app"-->
+    <!--href="https://www.immomo.com/download/qrcode?d=i&v=613&mark=momentPage&market=weixin">-->
+    <!--<img src="https://s.momocdn.com/w/u/img/2016/11/02/1478057267492-%E6%8F%90%E7%A4%BA%E4%B8%8B%E8%BD%BD_03.png"-->
+    <!--alt="">-->
+    <!--<p>{{theme_info.theme_name}}</p>-->
+    <!--<p>{{theme_info.desc}}</p>-->
+    <!--</a>-->
+    <!--<div v-if="in_app" style="height:.9rem;"></div>-->
+    <!--<div v-if="in_app" @click="publishGoto()" class="publish_btn">-->
+    <!--<span>拍摄视频</span>-->
+    <!--</div>-->
+</div>
+<!--<script src="https://s.momocdn.com/w/js/2016/12/30/1483088675003-JP08bf502429aa86a0ff5a7b558cbde040.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/vue/2.0.3/vue.min.js"></script>-->
+<script src="https://fes.wemomo.com/static/dev.js?m=zepto,mm/mkBridge,mm/mock-3.0,mt.loading-2.0,mt.bottomSelect,mt.notice"></script>
+<script src="https://s.momocdn.com/w/u/js/2016/10/10/1476093638158-popup.js"></script>
+<!--<script src="https://s.momocdn.com/w/u/js/2017/03/02/1488451226218-vue-waterfall.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/vue/2.0.3/vue.min.js"></script>     <!--vue需单独引waterfall插件才可用,否则插件不起作用-->
+<script src="http://app.moptym.com/cdn/vue-waterfall/vue-waterfall.min.js"></script>
+
+<script>
+    $(function () {
+        var w = $(document.body).width();
+        var x = (w / 375) * 50;
+        $('html').css('font-size', x + 'px');
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() < 10) { //判断小于则为向上滚动
+                mm.ui.setPulldown({
+                    type: 1 // Int: 1-允许下拉，0-不允许下拉
+                })
+            } else {
+                mm.ui.setPulldown({
+                    type: 0 // Int: 1-允许下拉，0-不允许下拉
+                })
+            }
+        });
+    })
+    //    $.showLoading();
+    var app = new Vue({
+        el: '#app_el',
+        components: {
+            'waterfall': Waterfall.waterfall,
+            'waterfall-slot': Waterfall.waterfallSlot
+        },
+        data: {
+            tid: '',
+            selected_sex: 'A',
+            theme_info: {},
+            moment_list: [],
+            align: 'center',
+            items: [{
+                'ratio': 1,
+                "moment": {
+                    "distance": "10.20km",
+                    "video_url": "http://img.momocdn.com/moment/E9/E2/E9E271BE-EDA7-3FFD-8F6E-2DC02F2981CC20170304.mp4",
+                    "cover": "http://img.momocdn.com/moment/E9/E2/E9E271BE-EDA7-3FFD-8F6E-2DC02F2981CC20170304_L.jpg",
+                    "time": "23小时前",
+                    "momentid": "9208485"
+                },
+                "user": {
+                    "momoid": "371205577",
+                    "name": "♛ 李 爷",
+                    "img": "http://img.momocdn.com/album/50/12/5012550A-639E-488F-A48A-2E91E8B5D84B20161114_S.jpg",
+                    "sex": "F",
+                    "update_cnt": 0
+                },
+
+            },
+                {
+                    'ratio': 1.5,
+                    "moment": {
+                        "distance": "10.20km",
+                        "video_url": "http://img.momocdn.com/moment/E9/E2/E9E271BE-EDA7-3FFD-8F6E-2DC02F2981CC20170304.mp4",
+                        "cover": "http://img.momocdn.com/moment/E9/E2/E9E271BE-EDA7-3FFD-8F6E-2DC02F2981CC20170304_L.jpg",
+                        "time": "23小时前",
+                        "momentid": "9208485"
+                    },
+                    "user": {
+                        "momoid": "371205577",
+                        "name": "♛ 李 爷",
+                        "img": "http://img.momocdn.com/album/50/12/5012550A-639E-488F-A48A-2E91E8B5D84B20161114_S.jpg",
+                        "sex": "F",
+                        "update_cnt": 0
+                    },
+
+                },
+                {
+                    'ratio': 0.8,
+                    "moment": {
+                        "distance": "10.20km",
+                        "video_url": "http://img.momocdn.com/moment/E9/E2/E9E271BE-EDA7-3FFD-8F6E-2DC02F2981CC20170304.mp4",
+                        "cover": "http://img.momocdn.com/moment/E9/E2/E9E271BE-EDA7-3FFD-8F6E-2DC02F2981CC20170304_L.jpg",
+                        "time": "23小时前",
+                        "momentid": "9208485"
+                    },
+                    "user": {
+                        "momoid": "371205577",
+                        "name": "♛ 李 爷",
+                        "img": "http://img.momocdn.com/album/50/12/5012550A-639E-488F-A48A-2E91E8B5D84B20161114_S.jpg",
+                        "sex": "F",
+                        "update_cnt": 0
+                    },
+
+                },
+                {
+                    'ratio': 1,
+                    "moment": {
+                        "distance": "10.20km",
+                        "video_url": "http://img.momocdn.com/moment/E9/E2/E9E271BE-EDA7-3FFD-8F6E-2DC02F2981CC20170304.mp4",
+                        "cover": "http://img.momocdn.com/moment/E9/E2/E9E271BE-EDA7-3FFD-8F6E-2DC02F2981CC20170304_L.jpg",
+                        "time": "23小时前",
+                        "momentid": "9208485"
+                    },
+                    "user": {
+                        "momoid": "371205577",
+                        "name": "♛ 李 爷",
+                        "img": "http://img.momocdn.com/album/50/12/5012550A-639E-488F-A48A-2E91E8B5D84B20161114_S.jpg",
+                        "sex": "F",
+                        "update_cnt": 0
+                    },
+
+                }],
+            page: 1,
+            isend: false,
+            locker: false,
+            bind_scroll: true,
+            empty: false,
+            select_tab: 'hot',     //'hot'热门;'near'附近
+//            hot_topic:0
+            in_app: true,
+            banner_img: 'https://s.momocdn.com/w/u/img/2016/12/23/1482461830742-bannerIng.png'
+        },
+
+        created: function () {
+            this.getData();
+            this.bindLoading();
+            this.initUIBtn();
+            this.isIos = (mm.platform == 'ios');
+            this.in_app = mm.is_webview;
+        },
+        ready: function () {
+            var _this = this;
+            mm.ui.refresh(function () {
+                <!--下拉刷新-->
+                _this.moment_list = [];
+                _this.page = 1;
+                _this.isend = false;
+                _this.locker = false;
+                _this.getData();
+            })
+        },
+        methods: {
+            calculateHeiht:function () {
+                var w = $('.cover_img_con').width()
+            },
+            reflowed: function () {
+                this.isBusy = false
+            },
+            getData: function (callback) {
+                var _this = this;
+                _this.empty = false;
+                mk.ajax({
+                    url: '/inc/moment/theme/getMomentList',
+                    type: 'get',
+                    data: {
+                        'themeid': _this.queryString('themeid'),
+                        'p': _this.page,
+                        'page_rows': 30,
+                        'source': _this.queryString('source')
+                    },
+                    success: function (info) {
+                        $.hideLoading();
+                        mm.ui.refreshEnd()
+                        if (info.ec != 200) {
+                            _this.isend = 1;
+                            _this.locker = false
+                            return;
+                        }
+                        if (!info.data.list || info.data.list.length == 0) {
+                            _this.isend = 1;
+                            _this.locker = false;
+                        }
+                        if (_this.page == 1 && info.data.list.length == 0) {
+                            _this.empty = true;
+                        }
+                        if (info.data.remain == 0) {               //判断一个字段,为0不再继续请求
+                            _this.isend = 1;
+                            console.log(_this.isend);
+                        }
+                        if (p = 1) {
+                            _this.theme_info = info.data.theme_info;
+                            if (info.data.theme_info.banner != '') {
+                                _this.banner_img = info.data.theme_info.banner;
+                            }
+                            _this.tid = info.data.theme_info.themeid;
+                            mm.ui.setTitle({
+                                title: info.data.theme_info.theme_name // String: 标题文字
+                            })
+                        }
+                        _this.moment_list = _this.moment_list.concat(info.data.list);
+                        _this.moment_list = _this.myUnique(_this.moment_list);
+                        _this.page++;
+                        _this.locker = false;
+                        callback && callback();
+                    },
+
+                    error: function () {
+                        mm.ui.refreshEnd()
+                        callback && callback();
+                    }
+                })
+            },
+            bindLoading: function () {
+                var _this = this;
+                $(window).scroll(function () {
+                    var range = 300;
+                    var srollPos = $(window).scrollTop();
+                    var totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+                    if (_this.isend == -1) {
+                        _this.isend = 0;
+                    }
+                    if (($(document).height() - range) <= totalheight && !_this.isend) {
+                        if (_this.locker) {
+                            return;
+                        }
+                        _this.locker = true;
+                        if (!_this.bind_scroll) {
+                            return;
+                        }
+                        _this.getData();
+                    }
+
+                });
+            },
+            queryString: function (name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                        results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            },
+            momentGoto: function (item) {
+                var _this = this;
+                var in_momo = mm.is_webview;
+                if (in_momo) {                    //在客户端内调起goto!!!!!!!!!!!!!!!!!!!
+                    if (mm.compare('7.0') < 0) {
+                        $.showTip('当前版本不支持,请升级至最新版本');
+                        return;
+                    }
+//                    var moment_userid = item.user.momoid.toString();
+                    var moment_id = item.moment.momentid.toString();
+                    var theme_id = _this.theme_info.themeid.toString();
+                    var cd_prm = JSON.stringify({"type": 'theme'})
+                    var prm_obj = {"topic_id": theme_id, "sex": 'A', "momentid": moment_id}
+                    var param = {
+                        "m": {
+                            "t": "话题时刻",
+                            'a': 'goto_topic_moment',
+                            "prm": JSON.stringify(prm_obj),
+                        },
+                        "cb_prm": cd_prm,    //传给客户端更多参数的
+                        "cb_path": "/v1/moment/list/nearbybytopic"
+                    };
+                    var url = 'momochat://immomo.com?goto=' + JSON.stringify(param);
+                    mm.ui.openUrl({
+                        target: 1,
+                        url: url,
+                        pass: 0
+                    })
+//                    mm.ui.openUrl({
+//                        target: 3,   // 0:当前webview打开, 1:新的webview打开, 2:外部浏览器打开, 3:使用goto打开([x|x|x])
+//                        url: '[|goto_moment_single|'+moment_id+']',
+//                        pass: 0      // 是否为url添加passport，默认为 0-否，mm.version v3.3 add
+//                                     // (target=1且url不为momochat时有效) (client同学忽略)
+//                    })
+                } else {                  //不在客户端内插入video标签播放
+                    var video_url = item.moment.video_url;
+                    var img_url = item.moment.cover;
+                    var url = 'http://m.immomo.com/s/moment_topic/video_player.html?v=' + video_url + '&i=' + img_url
+                    if (_this.isIos) {
+                        mm.ui.openUrl({
+                            target: 1,   // 0:当前webview打开, 1:新的webview打开, 2:外部浏览器打开, 3:使用goto打开([x|x|x])
+                            url: url,
+                            pass: 0      // 是否为url添加passport，默认为 0-否，mm.version v3.3 add
+                                         // (target=1且url不为momochat时有效) (client同学忽略)
+                        })
+                    } else {
+                        window.open(url);
+                    }
+                }
+            },
+            myUnique: function (array) {                       //去重
+                var r = [];
+                for (var i = 0, l = array.length; i < l; i++) {
+                    for (var j = i + 1; j < l; j++)
+                        if (array[i].moment.momentid === array[j].moment.momentid) j = ++i;
+                    r.push(array[i]);
+                }
+                return r;
+            },
+            publishGoto: function () {
+                var _this = this;
+                if (mm.compare('7.1') <= 0) {
+                    $.showTip('请升级至最新版本参与活动');
+                    return;
+                }
+                var param = {
+                    "m": {
+                        "t": "从附近人跳转到动态详情,返回时先到个人资料页",
+                        "a": 'goto_publish_moment',
+                        "prm": JSON.stringify({"themeid": "", "topicid": ""})
+                    }
+                };
+                mm.ui.openUrl({
+                    target: 3,   // 0:当前webview打开, 1:新的webview打开, 2:外部浏览器打开, 3:使用goto打开([x|x|x])
+                    url: JSON.stringify(param),
+                    pass: 0      // 是否为url添加passport，默认为 0-否，mm.version v3.3 add
+                                 // (target=1且url不为momochat时有效) (client同学忽略)
+                })
+            },
+            initUIBtn: function () {
+                var _this = this;
+                mm.ui.setUIBtn({
+                    title: '分享',  // 右上角显示文字
+                }, function () {
+                    mm.share.showPanel({
+                        title: 'share', // 标题，sina渠道使用
+                        text: '时刻话题',       // 内容
+                        pic: '',          // 分享图片完整地址，如果为空，使用陌陌logo
+                        //        Note: 1. 为外网地址，2. jpg 格式
+                        apps: ['momo_feed', 'momo_contacts', 'weixin', 'weixin_friend'],
+                        url: location.href,
+                        configs: {
+
+                            'momo_contacts': {               // 好友 2015-6-3 安卓增加
+                                title: _this.theme_info.theme_name,
+                                text: _this.theme_info.desc,
+                                url: location.href,
+                                pic: "https://s.momocdn.com/w/u/img/2017/01/13/1484302535493-%E6%97%B6%E5%88%BB270.png"
+                            },
+                            'momo_feed': {
+                                text: '时刻话题',    // 服务器下发时的文字
+                                pic: '',
+                                // sdk=1 时，忽略
+                                sdk: 1,        // 0: 使用旧版服务器代发(默认)，1: 使用native编辑界面（7.1 add）
+                                sdk_text: '', // 使用sdk分享时的默认填充文字(只有特殊业务需要，并向[孙跃然]确认)(7.1 add)
+                                resource: {       // 小尾巴配置
+                                    debug: 1,        // 只发内网
+                                    title: _this.theme_info.theme_name,
+                                    desc: _this.theme_info.desc,
+                                    icon: "https://s.momocdn.com/w/u/img/2017/01/13/1484302535493-%E6%97%B6%E5%88%BB270.png", // 小尾巴图标
+                                    link: location.href // 小尾巴链接
+                                }
+                            },
+                            'weixin': {                       // 微信朋友圈
+                                title: _this.theme_info.theme_name,
+                                text: _this.theme_info.theme_name,
+                                url: location.href,
+                                pic: "https://s.momocdn.com/w/u/img/2017/01/13/1484302535493-%E6%97%B6%E5%88%BB270.png"
+                            },
+                            'weixin_friend': {                       // 微信好友
+                                title: _this.theme_info.theme_name,
+                                text: _this.theme_info.desc,
+                                url: location.href,
+                                pic: "https://s.momocdn.com/w/u/img/2017/01/13/1484302535493-%E6%97%B6%E5%88%BB270.png"
+                            }
+
+                        }
+                    }, function () {
+                    })
+                })
+
+            }
+
+        }
+    })
+
+</script>
+</body>
+</html>

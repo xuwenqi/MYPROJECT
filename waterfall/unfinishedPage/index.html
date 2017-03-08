@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>时刻话题</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta content="email=no" name="format-detection" />
+    <link rel="stylesheet" href="https://fes.wemomo.com/static/dev.css?m=ui.reset">
+    <link rel="stylesheet" href="static/css/popup.css">
+    <style>
+        body {
+            background: #fff;
+        }
+        
+        .topic_head {
+            width: 100%;
+            height: 2.18rem;
+            padding-top: 0.62rem;
+            overflow: hidden;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.5);
+            background-size: cover;
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .topic_img {
+            width: 0.9rem;
+            height: 0.9rem;
+            border-radius: .08rem;
+            display: block;
+            position: absolute;
+            top: 1.02rem;
+            left: 0.24rem;
+        }
+        
+        .topic_name {
+            font-size: 0.32rem;
+            line-height: 0.45rem;
+            color: rgb(255, 255, 255);
+            font-family: "PingFang SC";
+            font-weight: normal;
+            position: absolute;
+            top: 1.02rem;
+            left: 1.34rem;
+        }
+        
+        .topic_info {
+            font-family: "SF UI Display";
+            font-weight: normal;
+            font-size: 0.26rem;
+            line-height: 0.37rem;
+            color: rgba(255, 255, 255, 0.6);
+            width: 5rem;
+            position: absolute;
+            top: 1.53rem;
+            left: 1.34rem;
+        }
+        
+        .topic_desc {
+            width: 100%;
+            min-height: 1.25rem;
+            box-sizing: border-box;
+            padding: .24rem .3rem;
+            position: relative;
+        }
+        
+        .topic_desc p {
+            font-size: .28rem;
+            line-height: .34rem;
+            font-family: "PingFang SC";
+            font-weight: normal;
+            color: #aaa;
+        }
+        
+        .topic_desc:after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #f0f0f0;
+            transform: scaleY(0.5);
+        }
+        
+        .main_container {
+            margin-left: .18rem;
+            margin-right: .18rem;
+            /*overflow: hidden;*/
+            box-sizing: border-box;
+            padding-top: .2rem;
+        }
+        
+        .moment_container {
+            width: 50%;
+            /*height:5.2rem;*/
+            padding: 0 0.07rem;
+            /*float: left;*/
+            box-sizing: border-box;
+        }
+        
+        .moment {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            border-radius: 0.06rem;
+        }
+        
+        .cover_img_con {
+            position: relative;
+            border-radius: .06rem;
+            overflow: hidden;
+            max-height: 4.72rem;
+            overflow: hidden;
+            background-color: rgb(210, 210, 210);
+        }
+        
+        .cover_img {
+            display: block;
+        }
+        
+        .moment_name {
+            font-size: .26rem;
+            font-family: "PingFang SC";
+            font-weight: 500;
+            line-height: .38rem;
+            color: #fff;
+            position: absolute;
+            left: 0.1rem;
+            bottom: 0.07rem;
+            width: 3rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .moment_foot {
+            width: 100%;
+            height: 1rem;
+            box-sizing: border-box;
+            padding-left: 0.2rem;
+            padding-top: 0.27rem;
+            position: relative;
+            bottom: 0;
+            background-color: #fff;
+        }
+        
+        .user_img {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            position: absolute;
+            top: .14rem;
+            left: .07rem;
+        }
+        
+        .user_name {
+            position: absolute;
+            left: .7rem;
+            top: .2rem;
+            font-size: 0.22rem;
+            line-height: 0.38rem;
+            font-family: "PingFang SC";
+            font-weight: 500;
+            color: #3c3c3c;
+            /*width: 2.5rem;*/
+            width: 1.8rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        
+        .like_count {
+            right: 0;
+            font-size: .28rem;
+            font-family: "DIN Alternate";
+            font-weight: bold;
+            color: #c8c8c8;
+            line-height: .32rem;
+            top: .23rem;
+            position: absolute;
+            padding-left: .3rem;
+            box-sizing: border-box;
+        }
+        
+        .like_count:before {
+            content: '';
+            background-image: url('https://s.momocdn.com/w/u/img/2017/03/03/1488510371880-like.png');
+            background-size: 100% 100%;
+            width: .24rem;
+            height: .24rem;
+            position: absolute;
+            left: 0;
+            top: .03rem;
+        }
+        
+        .publish_btn {
+            width: 100%;
+            height: .9rem;
+            line-height: .9rem;
+            text-align: center;
+            background-color: rgba(52, 98, 255, 0.94);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .publish_btn span {
+            color: #fff;
+            font-size: .28rem;
+            font-family: "PingFang SC";
+            font-weight: normal;
+            padding-left: .5rem;
+            height: .4rem;
+            line-height: .4rem;
+            position: relative;
+        }
+        
+        .publish_btn span:before {
+            content: '';
+            background-image: url('https://s.momocdn.com/w/u/img/2017/03/03/1488523383047-Bitmap%20(1).png');
+            background-size: 100% 100%;
+            width: .33rem;
+            height: .29rem;
+            position: absolute;
+            left: 0;
+            top: .05rem;
+        }
+        
+        [v-cloak] {
+            display: none;
+        }
+        
+        .loading {
+            height: .6rem;
+            text-align: center;
+            padding-top: .19rem;
+        }
+        
+        .loading img {
+            height: .5rem;
+            -webkit-animation: circle 0.4s infinite linear;
+            /*匀速 循环*/
+        }
+        
+        @-webkit-keyframes circle {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+        
+        .sex-icon {
+            position: absolute;
+            width: 0.25rem;
+            height: 0.25rem;
+            top: 0.65rem;
+            left: 0.58rem;
+        }
+        
+        .empty {
+            padding-top: 2rem;
+        }
+        
+        .empty img {
+            width: 3.44rem;
+            height: 2.7rem;
+            margin: 0 auto;
+            position: relative;
+            display: block;
+        }
+        
+        .banner {
+            box-sizing: border-box;
+            width: 100%;
+            height: .82rem;
+            overflow: hidden;
+            /*padding-left: 0.15rem;*/
+            /*padding-right: 0.22rem;*/
+            line-height: .82rem;
+            font-size: .28rem;
+            position: relative;
+        }
+        
+        .banner:after {
+            content: '';
+            background-color: #f0f0f0;
+            height: 1px;
+            width: 100%;
+            -moz-transform: scaleY(0.5);
+            -ms-transform: scaleY(0.5);
+            -o-transform: scaleY(0.5);
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .banner .hot {
+            box-sizing: border-box;
+            width: 50%;
+            text-align: center;
+            float: left;
+        }
+        
+        .banner .near {
+            box-sizing: border-box;
+            width: 50%;
+            text-align: center;
+            float: left;
+        }
+        
+        .banner .select {
+            box-sizing: border-box;
+            width: 1rem;
+            height: .4rem;
+            text-align: center;
+            float: right;
+            margin-top: .2rem;
+        }
+        
+        .select_line {
+            width: 2.7rem;
+            height: 0.04rem;
+            background: #3462FF;
+            position: absolute;
+            bottom: 0.02rem;
+            transition: 0.2s;
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+        
+        .selected {
+            color: #3462FF;
+            font-weight: 700;
+        }
+        
+        .left {
+            left: 0.55rem;
+        }
+        
+        .right {
+            left: 4.25rem;
+        }
+        
+        .outer_box {
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+            overflow: hidden;
+            position: relative;
+            box-sizing: border-box;
+        }
+        
+        .hot_container {
+            display: inline-block;
+            width: 100%;
+            transform: translate(-375px, 0);
+        }
+        
+        .near_container {
+            display: inline-block;
+            width: 100%;
+            /*height:100%;*/
+            transform: translate(0px, 0);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            transition: 0.2s
+        }
+        
+        .grey-line {
+            height: .1rem;
+            box-sizing: border-box;
+            background-color: #f5f5f5;
+        }
+        
+        .head_img {
+            width: 100%;
+            display: block;
+            position: relative;
+        }
+        
+        .head_text {
+            font-size: .23rem;
+            color: #fff;
+            text-align: center;
+            position: absolute;
+            top: 3.6rem;
+            width: 100%;
+        }
+        
+        .head_text img {
+            width: .18rem;
+            height: .23rem;
+            vertical-align: middle;
+            position: absolute;
+            margin-left: .03rem;
+            margin-top: .01rem;
+        }
+        
+        .head_text span:first-child {
+            margin-right: .06rem;
+        }
+        
+        .single_head_list {
+            height: 1.38rem;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: rgb(77, 47, 126);
+            position: relative;
+        }
+        
+        .single_head_list .left_title_img {
+            width: 2.83rem;
+            height: .64rem;
+            position: absolute;
+            top: .36rem;
+            left: 0;
+        }
+        
+        .single_head_list .head_list {
+            overflow: hidden;
+            width: 4.3rem;
+            position: absolute;
+            right: 0;
+        }
+        
+        .single_head_list .head_list img {
+            width: .76rem;
+            height: .76rem;
+            border-radius: 50%;
+            margin-right: .2rem;
+            float: left;
+            margin-top: .32rem;
+        }
+        
+        .single_head_list .head_list .right_icon {
+            width: .17rem;
+            height: .3rem;
+            margin-top: .52rem;
+        }
+        
+        .single_head_list .head_list img:last-child {}
+        
+        .download {
+            width: 100%;
+            /* height: 1.4rem; */
+            box-sizing: border-box;
+            background-color: rgb(23, 142, 237);
+            padding-top: 0.21rem;
+            padding-bottom: 0.21rem;
+            position: fixed;
+            bottom: 0;
+            display: block;
+            color: #fff;
+        }
+        
+        .download img {
+            width: 94%;
+            /*height:73%;*/
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .download p:nth-child(2) {
+            position: absolute;
+            width: 50%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            font-size: .32rem;
+            font-weight: 700;
+            top: 23%;
+            left: 17%;
+        }
+        
+        .download p:last-child {
+            position: absolute;
+            width: 50%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            font-size: .28rem;
+            font-weight: 300;
+            top: 55%;
+            left: 17%;
+        }
+        
+        .empty_in {
+            height: 1.05rem;
+        }
+        
+        .empty_out {
+            /*height:1.4rem;*/
+            height: 1.5rem;
+        }
+        
+        .back_img {
+            width: 100%;
+            /*height:2.9rem;*/
+            display: block;
+            position: relative;
+        }
+        
+        .img_con {
+            width: 100%;
+            height: 2.18rem;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<div id="app_el" v-cloak>
+    <!--<div class="topic_head" :style="{backgroundImage: 'url(' + banner_img + ')'}">                               &lt;!&ndash;这部分是话题的题目部分,双十一活动结束之后恢复显示&ndash;&gt;-->
+    <div class="topic_head">
+        <img class="topic_img" :src="topic_info.avator" alt="">
+        <p class="topic_name">{{{topic_info.tname}}}</p>
+        <p class="topic_info">{{{topic_info.desc}}}</p>
+    </div>
+    <div class="img_con">
+        <img :src="banner_img" class="back_img">
+    </div>
+
+    <div class="topic_desc">
+        <p>{{{topic_info.desc}}}</p>
+    </div>
+
+    <div v-if="topic_info.hot_topic">
+        <!--<div v-if="true" style="padding-bottom: .2rem">-->
+        <!--<div class="grey-line"></div>-->
+        <div class="banner">
+            <span @click="checkTab('hot')" :class="['hot',select_tab=='hot'?'selected':'']">热门</span>
+            <span @click="checkTab('near')" :class="['near',select_tab=='near'?'selected':'']">附近</span>
+            <!--<img class="select" @click="show_select()" src="https://s.momocdn.com/w/u/img/2016/10/20/1476956574974-%E6%97%B6%E5%88%BB%E8%AF%9D%E9%A2%98-4_10.png">-->
+            <span :class="['select_line',select_tab=='hot'?'left':'right']"></span>
+        </div>
+    </div>
+
+
+    <div v-if="!empty" class="main_container">
+        <div v-for="item in moment_list" class="moment_container" data-sex="{{item.user.sex}}" data-userid="{{item.user.momoid}}" @click="momentGoto(item)">
+            <div class="moment">
+                <div class="cover_img_con">
+                    <img class="cover_img" :src="item.moment.cover" alt="">
+                    <p class="moment_name">怎么周末又结束了?!!!!!</p>
+                </div>
+                <!--<p class="moment_distance">{{item.moment.distance}}</p>-->
+                <div class="moment_foot">
+                    <img class="user_img" :src="item.user.img" alt="">
+                    <!--<img v-if="item.user.sex=='M'" class="sex-icon" src="https://s.momocdn.com/w/u/img/2016/10/13/1476359960631-%E6%97%B6%E5%88%BB%E8%AF%9D%E9%A2%98-2_06.png" alt="">-->
+                    <!--<img v-if="item.user.sex=='F'" class="sex-icon" src="https://s.momocdn.com/w/u/img/2016/10/13/1476359960626-%E6%97%B6%E5%88%BB%E8%AF%9D%E9%A2%98-2_03.png" alt="">-->
+                    <p class="user_name">{{{item.user.name}}}</p>
+                    <p class="like_count">8888</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loading" v-if="!isend&&page>1"><img src="https://s.momocdn.com/w/u/img/03/10/1457603892170-ic_loading.png" alt=""></div>
+    <div v-if="empty" class="empty">
+        <img src="https://s.momocdn.com/w/u/img/2016/10/14/1476415482706-%E6%97%B6%E5%88%BB%E8%AF%9D%E9%A2%98%EF%BC%8D%E6%97%A0%E8%AF%9D%E9%A2%98_05.png" alt="">
+    </div>
+    <div :class="[in_app?'empty_in':'empty_out']"></div>
+    <!--<img v-if="topic_info.has_auth==1&&in_app" @click="publishGoto()" class="bottom_button" src="https://s.momocdn.com/w/u/img/2017/03/03/1488513804275-rbtn.png" alt="">-->
+    <div v-if="topic_info.has_auth==1&&in_app" @click="publishGoto()" class="publish_btn">
+        <span>拍摄视频</span>
+    </div>
+    <a class="download" v-if="!in_app" href="http://www.immomo.com/">
+        <img src="https://s.momocdn.com/w/u/img/2016/11/02/1478057267492-%E6%8F%90%E7%A4%BA%E4%B8%8B%E8%BD%BD_03.png" alt="">
+        <p>{{topic_info.tname}}</p>
+        <p>{{topic_info.desc}}</p>
+    </a>
+</div>
+
+<script src="https://fes.wemomo.com/static/dev.js?m=zepto,vue,mm/mkBridge,mm/mock-3.0,mt.loading-2.0,mt.bottomSelect,mt.notice"></script>
+<script src="https://s.momocdn.com/w/u/js/2016/10/10/1476093638158-popup.js"></script>
+<!--<script src="https://s.momocdn.com/w/u/js/2017/03/02/1488451226218-vue-waterfall.min.js"></script>-->
+<script src="https://s.momocdn.com/w/u/js/2017/03/01/1488352018484-masonry.js"></script>
+<!--瀑布流布局插件-->
+<!--<script src="https://s.momocdn.com/w/u/js/2017/03/01/1488357264884-imagesloaded.js"></script>     &lt;!&ndash;判断图片加载完成插件&ndash;&gt;-->
+<script>
+    $(function() {
+        var w = $(document.body).width();
+        //        var w2=document.documentElement.clientWidth;
+        //        alert(w+"---"+w2);
+        var x = (w / 375) * 50;
+        $('html').css('font-size', x + 'px');
+
+        $(window).scroll(function() {
+            if ($(window).scrollTop() < 10) { //判断小于则为向上滚动
+                mm.ui.setPulldown({
+                    type: 1 // Int: 1-允许下拉，0-不允许下拉
+                })
+            } else {
+                mm.ui.setPulldown({
+                    type: 0 // Int: 1-允许下拉，0-不允许下拉
+                })
+            }
+        });
+    })
+    $.showLoading();
+    var app = new Vue({
+        el: '#app_el',
+        data: {
+            tid: '',
+            selected_sex: 'A',
+            topic_info: {},
+            moment_list: [],
+            page: 1,
+            isend: false,
+            locker: false,
+            bind_scroll: true,
+            empty: false,
+            select_tab: 'hot', //'hot'热门;'near'附近
+            //            hot_topic:0
+            in_app: true,
+            banner_img: 'https://s.momocdn.com/w/u/img/2016/12/23/1482461830742-bannerIng.png'
+        },
+        created: function() {
+            var _this = this;
+            //            this.getSex(function () {
+            _this.getTopicInfo();
+            ////                _this.init_select();
+            //            });
+            //            this.initUIBtn();
+            this.bindLoading();
+            //            this.initShare();
+            this.isIos = (mm.platform == 'ios');
+            this.in_app = mm.is_webview;
+        },
+        ready: function() {
+            var _this = this;
+            mm.ui.refresh(function() { <!--下拉刷新-->
+                    //                _this.selected_sex='A';
+                    _this.moment_list = [];
+                    _this.page = 1;
+                    _this.isend = false;
+                    _this.locker = false;
+                    //                _this.list_empty=false;
+                    _this.getData();
+                })
+                //            var msnry = new Masonry( '.main_container', {
+                //                // options
+                //            });
+        },
+        methods: {
+            getTopicInfo: function() {
+                var _this = this;
+                _this.tid = this.queryString('tid');
+                mk.ajax({
+                    url: '/inc/moment/topic/getTopicInfo',
+                    data: {
+                        'tid': _this.tid
+                    },
+                    success: function(info) {
+                        _this.topic_info = info.data.topic_info;
+                        if (info.data.topic_info.banner != '') {
+                            _this.banner_img = info.data.topic_info.banner;
+                        }
+                        _this.initUIBtn();
+                        _this.getData();
+                    },
+                    error: function() {
+
+                    }
+                })
+
+            },
+            getData: function(callback) {
+                var _this = this;
+                _this.empty = false;
+                //                _this.tid = _this.queryString('tid');
+                var myurl = '/inc/moment/topic/getHotMomentByTid';
+                if (_this.select_tab == 'near') {
+                    myurl = '/inc/moment/topic/getMomentByTid'
+                }
+                mk.ajax({
+                    url: myurl,
+                    type: 'get',
+                    data: {
+                        'tid': _this.tid,
+                        'p': _this.page,
+                        'page_rows': 50,
+                        'sex': _this.selected_sex,
+                        'source': _this.queryString('source')
+                    },
+                    success: function(info) {
+                        $.hideLoading();
+                        mm.ui.refreshEnd()
+                        if (info.ec != 200) {
+                            _this.isend = 1;
+                            _this.locker = false
+                            return;
+                        }
+                        if (!info.data.moment_list || info.data.moment_list.length == 0) {
+                            _this.isend = 1;
+                            _this.locker = false;
+                        }
+                        if (_this.page == 1 && info.data.moment_list.length == 0) {
+                            _this.empty = true;
+                        }
+                        //                        if(info.data.moment_list.length<10){               //一页十个数据,少于十个不再继续请求
+                        //                            _this.isend=1;
+                        //                            console.log(_this.isend);
+                        //                        }
+                        if (info.data.remain == 0) { //判断一个字段,为0不再继续请求
+                            _this.isend = 1;
+                            console.log(_this.isend);
+                        }
+                        //                        _this.topic_info = info.data.topic_info;
+                        //                        _this.hot_topic = _this.topic_info.hot_topic;
+                        _this.moment_list = _this.moment_list.concat(info.data.moment_list);
+                        _this.moment_list = _this.myUnique(_this.moment_list);
+                        _this.page++;
+                        _this.locker = false;
+                        callback && callback();
+
+                    },
+
+                    error: function() {
+                        mm.ui.refreshEnd()
+                        callback && callback();
+                    }
+                })
+            },
+            getDataLazy: function(callback) {
+                var _this = this;
+                _this.empty = false;
+                //                _this.tid = _this.queryString('tid');
+                var myurl = '/inc/moment/topic/getHotMomentByTid';
+                if (_this.select_tab == 'near') {
+                    myurl = '/inc/moment/topic/getMomentByTid'
+                }
+                mk.ajax({
+                    url: myurl,
+                    type: 'get',
+                    data: {
+                        'tid': _this.tid,
+                        'p': _this.page,
+                        'page_rows': 50,
+                        'sex': _this.selected_sex
+                    },
+                    success: function(info) {
+                        $.hideLoading();
+                        mm.ui.refreshEnd()
+                        if (info.ec != 200) {
+                            _this.isend = 1;
+                            _this.locker = false
+                            return;
+                        }
+                        if (!info.data.moment_list || info.data.moment_list.length == 0) {
+                            _this.isend = 1;
+                            _this.locker = false;
+                        }
+                        //                        if(info.data.moment_list.length<10){               //一页十个数据,少于十个不再继续请求
+                        //                            _this.isend=1;
+                        //                            console.log(_this.isend);
+                        //                        }
+                        if (info.data.remain == 0) { //判断一个字段,为0不再继续请求
+                            _this.isend = 1;
+                            console.log(_this.isend);
+                        }
+                        //                        _this.topic_info = info.data.topic_info;
+                        _this.moment_list = [];
+                        _this.moment_list = _this.moment_list.concat(info.data.moment_list);
+                        _this.moment_list = _this.myUnique(_this.moment_list);
+                        //                        window.scrollTo(0,0);
+                        _this.page++;
+                        _this.locker = false;
+                        if (_this.moment_list.length == 0) {
+                            _this.empty = true;
+                        }
+                        callback && callback();
+                    },
+                    error: function() {
+                        mm.ui.refreshEnd()
+                        callback && callback();
+                    }
+                })
+            },
+            bindLoading: function() {
+                var _this = this;
+                $(window).scroll(function() {
+                    var range = 500;
+                    var srollPos = $(window).scrollTop();
+                    var totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+                    if (_this.isend == -1) {
+                        _this.isend = 0;
+                    }
+                    if (($(document).height() - range) <= totalheight && !_this.isend) {
+                        if (_this.locker) {
+                            return;
+                        }
+                        _this.locker = true;
+                        if (!_this.bind_scroll) {
+                            return;
+                        }
+                        _this.getData();
+                    }
+
+                });
+            },
+            queryString: function(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            },
+            momentGoto: function(item) {
+                var _this = this;
+                var in_momo = mm.is_webview;
+                if (in_momo) { //在客户端内调起goto!!!!!!!!!!!!!!!!!!!
+                    var moment_userid = item.user.momoid.toString();
+                    var moment_id = item.moment.momentid.toString();
+                    var topicid = _this.tid.toString();
+                    var cd_prm
+                    var prm_obj = {
+                        "topic_id": topicid,
+                        "sex": _this.selected_sex,
+                        "remoteid": moment_userid
+                    }
+                    if (mm.compare('7.2.1') >= 0) {
+                        cd_prm = JSON.stringify({
+                            "type": _this.select_tab
+                        })
+                    } else {
+                        cd_prm = {
+                            "type": _this.select_tab
+                        }
+                    }
+                    if (mm.compare(7.5) >= 0) {
+                        prm_obj = {
+                            "topic_id": topicid,
+                            "sex": _this.selected_sex,
+                            "momentid": moment_id
+                        }
+                    }
+                    var param = {
+                        "m": {
+                            "t": "话题时刻",
+                            'a': 'goto_topic_moment',
+                            "prm": JSON.stringify(prm_obj),
+                        },
+                        "cb_prm": cd_prm, //传给客户端更多参数的
+                        "cb_path": "/v1/moment/list/nearbybytopic"
+                    };
+                    var url = 'momochat://immomo.com?goto=' + JSON.stringify(param);
+                    mm.ui.openUrl({
+                        target: 1, // 0:当前webview打开, 1:新的webview打开, 2:外部浏览器打开, 3:使用goto打开([x|x|x])
+                        url: url,
+                        pass: 0 // 是否为url添加passport，默认为 0-否，mm.version v3.3 add
+                            // (target=1且url不为momochat时有效) (client同学忽略)
+                    })
+                } else { //不在客户端内插入video标签播放
+                    var video_url = item.moment.video_url;
+                    var img_url = item.moment.cover;
+                    var url = 'http://m.immomo.com/s/moment_topic/video_player.html?v=' + video_url + '&i=' + img_url
+                    if (_this.isIos) {
+                        mm.ui.openUrl({
+                            target: 1, // 0:当前webview打开, 1:新的webview打开, 2:外部浏览器打开, 3:使用goto打开([x|x|x])
+                            url: url,
+                            pass: 0 // 是否为url添加passport，默认为 0-否，mm.version v3.3 add
+                                // (target=1且url不为momochat时有效) (client同学忽略)
+                        })
+                    } else {
+                        window.open(url);
+                    }
+                }
+            },
+            publishGoto: function() {
+                var _this = this;
+                var topicid = _this.tid.toString();
+                var param = {
+                    "m": {
+                        "t": "从附近人跳转到动态详情,返回时先到个人资料页",
+                        "a": 'goto_publish_moment',
+                        "prm": JSON.stringify({
+                            "themeid": "",
+                            "topicid": topicid
+                        })
+                    }
+                };
+                if (mm.compare('7.1') <= 0) {
+                    $.showTip('请升级至最新版本参与活动');
+                    return;
+                }
+                var url = 'momochat://immomo.com?goto=' + JSON.stringify(param);
+                mm.ui.openUrl({
+                    target: 1, // 0:当前webview打开, 1:新的webview打开, 2:外部浏览器打开, 3:使用goto打开([x|x|x])
+                    url: url,
+                    pass: 0 // 是否为url添加passport，默认为 0-否，mm.version v3.3 add
+                        // (target=1且url不为momochat时有效) (client同学忽略)
+                })
+            },
+            myUnique: function(array) { //去重
+                var r = [];
+                for (var i = 0, l = array.length; i < l; i++) {
+                    for (var j = i + 1; j < l; j++)
+                        if (array[i].moment.momentid === array[j].moment.momentid) j = ++i;
+                    r.push(array[i]);
+                }
+                return r;
+            },
+            checkTab: function(tab) {
+                var _this = this;
+                this.select_tab = tab;
+                _this.bind_scroll = false;
+                _this.page = 1;
+                _this.isend = false;
+                _this.locker = false;
+                _this.getDataLazy(function() {
+                    _this.bind_scroll = true;
+                });
+            },
+            initUIBtn: function() {
+                var _this = this;
+                if (_this.topic_info.hot_topic) {
+                    _this.select_tab = 'hot';
+                    mm.ui.setUIBtn({
+                        title: '分享', // 右上角显示文字
+                    }, function() {
+                        mm.share.showPanel({
+                            title: 'share', // 标题，sina渠道使用
+                            text: '时刻话题', // 内容
+                            pic: '', // 分享图片完整地址，如果为空，使用陌陌logo
+                            //        Note: 1. 为外网地址，2. jpg 格式
+                            apps: ['momo_feed', 'momo_contacts'],
+                            url: location.href,
+                            configs: {
+
+                                'momo_contacts': { // 好友 2015-6-3 安卓增加
+                                    title: _this.topic_info.tname,
+                                    text: _this.topic_info.desc,
+                                    url: location.href,
+                                    pic: "https://s.momocdn.com/w/u/img/2016/12/28/1482910015402-blue-icon.png"
+                                },
+                                'momo_feed': {
+                                    text: '时刻话题', // 服务器下发时的文字
+                                    pic: '',
+                                    // sdk=1 时，忽略
+                                    sdk: 1, // 0: 使用旧版服务器代发(默认)，1: 使用native编辑界面（7.1 add）
+                                    sdk_text: '', // 使用sdk分享时的默认填充文字(只有特殊业务需要，并向[孙跃然]确认)(7.1 add)
+                                    resource: { // 小尾巴配置
+                                        debug: 1, // 只发内网
+                                        title: _this.topic_info.tname,
+                                        desc: _this.topic_info.desc,
+                                        icon: "https://s.momocdn.com/w/u/img/2016/12/28/1482910015402-blue-icon.png", // 小尾巴图标
+                                        link: location.href // 小尾巴链接
+                                    }
+                                }
+
+                            }
+                        }, function() {})
+                    })
+                } else {
+                    _this.select_tab = 'near';
+                    //                    mm.ui.setUIBtn({                  //右上角筛选字
+                    //                        title:'筛选',
+                    //                    },function () {
+                    //                        _this.show_select();
+                    //                    })
+                }
+
+            }
+
+        }
+    })
+</script>
+</body>
+
+</html>
