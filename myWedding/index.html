@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <title>标题</title>
+    <link rel="css/swiper-3.4.1.min.css" type="" href="">
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta content="email=no" name="format-detection" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .a {
+            background: rgba(255, 0, 0, 0.2);
+            height: 100%;
+        }
+        
+        .b {
+            background: rgba(0, 255, 0, 0.2);
+            height: 100%;
+        }
+        
+        .c {
+            background: rgba(0, 0, 255, 0.2);
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide a">
+                slide1
+            </div>
+            <div class="swiper-slide b">
+                slide2
+            </div>
+            <div class="swiper-slide c">
+                slide3
+            </div>
+        </div>
+    </div>
+
+    <script src="js/zepto.min.js"></script>
+    <script src="js/swiper-3.4.1.jquery.min.js"></script>
+    <script>
+        var mySwiper = new Swiper('.swiper-container', {
+            autoplay: 3000, //可选选项，自动滑动
+            direction: 'horizontal',
+            loop: true,
+        })
+    </script>
+</body>
+
+</html>
