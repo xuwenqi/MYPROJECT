@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>我的时刻</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- 需要在head里引入的css和js文件 -->
+    <link rel="stylesheet" href="https://fes.wemomo.com/static/dev.css?m=ui/downloadHead">
+    <link rel="stylesheet" href="static/css/template.css" />
+
+    <!-- <link rel="stylesheet" href="static/css/share.css" /> -->
+</head>
+
+<body ontouchstart="">
+    <img style="position:absolute;top:-999px;left:-999px;width:400px;height:400px;" alt="" id="share-pic">
+    <section id="sample-pb">
+    </section>
+
+    <div id="content" class="content">
+        <div class="video-area">
+            <div class="bg-video">
+                <img class="bg-img" src="" />
+            </div>
+
+            <video style="display: none;" width="100%" height="100%" class="video-opt" webkit-playsinline="true" x-webkit-airplay="true" preload="auto" poster="URL">
+            <!--<source type="video/mp4" src="#">-->
+        </video>
+        </div>
+        <div class="head">
+            <div class="info">
+                <img alt="" class="avatar">
+                <div>
+                    <span class="name"></span>
+                    <span class="user-tag">
+                <i class="icon-tag">
+                    <ins class="user-age"></ins>
+                </i>
+            </span>
+                </div>
+
+                <p class="time"></p>
+                <a class="attention" href="">关注</a>
+            </div>
+            <span class="id-container">
+            <span class="id-text">陌陌ID:</span>
+            <span class="momo-id"></span>
+            </span>
+            <div class="clock">
+                <div id="countDown" class="countDown"></div>
+                <div id="countDownText" class="countDownText"></div>
+            </div>
+        </div>
+        <div id="tip-win" class="tip-win" style="display: none;">
+            <div class="tip-content">
+                <img src="https://s.momocdn.com/w/u/img/2016/08/19/1471605568770-share-pic-2.jpg" alt="" />
+                <p class="tip-des">识别二维码</p>
+                <p class="tip-des" id="code-text">关注陌陌参与7.0限量公测</p>
+                <div class="share-info">
+                    <p class="share-item" id="share-item-one">你来晚了，<span id="userName"></span>分享</p>
+                    <p class="share-item" id="share-item-two">的这个时刻已经过期消失了</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="more-recom">
+        <div class="recom-head">
+            <span class="tip-recom">
+            <img src="https://s.momocdn.com/w/u/img/2017/01/09/1483952359750-oval@3x.png" alt="">
+        </span>
+            <span class="tip-text">更多推荐</span>
+        </div>
+        <ul class="recom-list">
+        </ul>
+    </div>
+    <header class="header-donwload clearfix" style="display: block;">
+        <p class="clearfix">
+            <i class="momo-logo">
+                <img src="https://s.momocdn.com/w/u/img/2017/01/09/1483952365404-bitmap@3x.png" alt="">
+            </i>
+            <i class="clearfix momo-text">陌陌－总有新奇在身边</i>
+            <a id="weixin_inner_download_title" class="download-btn weixinguide-btn" href="http://www.immomo.com/download/qrcode?" onclick="">立即打开</a>
+            <a id="ios_downappstore_footer" class="download-btn ios-btn" href="http://www.immomo.com/download/ios/?&amp;b=ios_downappstore_footer"></i>立即打开</a>
+            <a id="android_downapk_footer" class="download-btn android-btn" href="http://www.immomo.com/download/momo_apk/?&amp;b=android_downapk_footer">立即打开</a>
+            <a id="wp_marketplace_title" class="download-btn wp-btn" href="http://www.immomo.com/download/wp_store/?&amp;b=wp_marketplace_title">立即打开</a>
+        </p>
+    </header>
+    <script src="https://fes.wemomo.com/static/dev.js?m=jquery:n,mt.mHistory,vue"></script>
+    <script src="https://s.momocdn.com/momofes/plugins/velocity/velocity.min.js"></script>
+    <script src='https://s.momocdn.com/w/u/js/2016/08/05/1470364939214-jquery-asPieProgress.js'></script>
+    <script src="https://s.momocdn.com/w/u/js/2016/08/09/1470733452756-number-pb.js"></script>
+    <script src="./static/js/main.js"></script>
+</body>
+
+</html>
