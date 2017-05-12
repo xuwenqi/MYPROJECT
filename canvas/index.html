@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <canvas id='my_canvas' width="300" height="400">
+            您的浏览器不支持canvas
+        </canvas>
+
+    <script>
+        var canvas = document.getElementById('my_canvas');
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+            ctx.beginPath();
+            ctx.moveTo(20, 20);
+            ctx.lineTo(200, 30);
+            // ctx.moveTo(200, 30);
+            ctx.lineTo(100, 300);
+            ctx.closePath();
+            ctx.lineWidth = 2.0;
+            ctx.strokeStyle = 'red';
+            ctx.stroke();
+
+            ctx.fillStyle = '#3f3f3f';
+            ctx.fillRect(110, 50, 300, 100);
+
+            ctx.strokeStyle = 'green';
+            ctx.strokeRect(110, 200, 80, 100);
+
+            ctx.clearRect(120, 60, 10, 10)
+
+            ctx.font = 'bold 40px PingFangSC';
+            ctx.textAlign = 'left';
+            ctx.fillStyle = 'rgba(255,100,0,0.3)';
+            ctx.fillText('Love you', 100, 50);
+
+            ctx.fillStyle = 'rgba(0,100,255,0.3)';
+            ctx.fillText('Me too', 100, 80);
+
+            ctx.beginPath();
+            ctx.arc(100, 100, 50, 0, Math.PI * 2, true);
+            ctx.fillStyle = 'rgba(0,255,0,0.3)';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(200, 200, 50, 0, Math.PI, false);
+            ctx.strokeWidth = 2.0;
+            ctx.strokeStyle = 'rgba(255,0,0,0.4)';
+            ctx.closePath();
+            ctx.stroke();
+
+            var myGradient = ctx.createLinearGradient(0, 0, 150, 100);
+            myGradient.addColorStop(0, 'rgba(255, 0, 0, 0.5)')
+            myGradient.addColorStop(1, 'rgba(0, 0, 255, 0.5)');
+
+            ctx.fillStyle = myGradient;
+            ctx.fillRect(0, 0, 150, 100)
+
+            var myGradient2 = ctx.createLinearGradient(150, 200, 200, 300);
+            myGradient2.addColorStop(0, 'rgba(255, 0, 0, 0.5)')
+            myGradient2.addColorStop(1, 'rgba(0, 0, 255, 0.5)');
+
+            ctx.beginPath();
+            ctx.arc(200, 300, 30, 0, Math.PI * 2, true);
+            ctx.fillStyle = myGradient2;
+            ctx.fill();
+
+            var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            console.log(imgData);
+            ctx.putImageData(imgData, 100, 100);
+
+            var posX = 20,
+                posY = 300;
+            var vx = 1,
+                vy = -20,
+                gravity = 1;
+
+            setInterval(function() {
+                ctx.fillStyle = "black";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                posX += vx;
+                posY += vy;
+
+                if (posY > canvas.height * 0.75) {
+                    vy *= -0.6;
+                    vx *= 0.75;
+                    posY = canvas.height * 0.75;
+                }
+
+                vy += gravity;
+
+                ctx.beginPath();
+                ctx.fillStyle = "white";
+
+                ctx.arc(posX, posY, 10, 0, Math.PI * 2, true);
+                ctx.closePath();
+                ctx.fill();
+            }, 30);
+
+        }
+    </script>
+</body>
+
+</html>
